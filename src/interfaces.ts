@@ -30,6 +30,7 @@ export interface IJobEditItem {
 	description: string;
 	skillList: string;
 	todo: string;
+	pin: string;
 }
 
 export interface ISkill {

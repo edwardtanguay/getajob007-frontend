@@ -51,6 +51,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 					description: rawJob.description,
 					skillList: rawJob.skillList,
 					todo: rawJob.todo,
+					pin: ''
 				},
 			};
 			_jobs.push(_job);

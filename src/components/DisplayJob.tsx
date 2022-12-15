@@ -7,8 +7,12 @@ interface IProps {
 }
 
 export const DisplayJob = ({ job }: IProps) => {
-	const { jobs, handleDeleteJob, handleToggleEditStatus } =
-		useContext(AppContext);
+	const {
+		jobs,
+		handleDeleteJob,
+		handleToggleEditStatus,
+		handleChangeFormField,
+	} = useContext(AppContext);
 
 	return (
 		<div className="job" key={job.id}>
@@ -51,10 +55,28 @@ export const DisplayJob = ({ job }: IProps) => {
 				})}
 			</div>
 			<div className="managePanel">
-				<button className="edit" onClick={() => handleToggleEditStatus(job)}>
+				<button
+					className="edit"
+					onClick={() => handleToggleEditStatus(job)}
+				>
 					Edit
 				</button>
-				<button className="delete" onClick={() => handleDeleteJob(job)}>Delete</button>
+				<div className="deleteButtonArea">
+					<input
+						placeholder="PIN"
+						type="password"
+						onChange={(e) =>
+							handleChangeFormField(e.target.value, job, 'pin')
+						}
+					/>
+					<button
+						disabled={job.editItem.pin.trim() === ''}
+						className="delete"
+						onClick={() => handleDeleteJob(job)}
+					>
+						Delete
+					</button>
+				</div>
 			</div>
 		</div>
 	);

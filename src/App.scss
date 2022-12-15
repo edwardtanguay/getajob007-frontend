@@ -117,22 +117,23 @@ body {
 					justify-content: space-between;
 
 					button {
-						background-color: #555;
-						border: 0;
-						font-size: 1.2rem;
-						border-radius: .3rem;
-						margin-top: 1rem;
-					}
-
-					button.delete {
-						&:hover {
-							background-color: rgb(152, 64, 46);
-						}
+						font-size: 1.1rem;
 					}
 
 					button.edit {
 						&:hover {
 							background-color: rgb(45, 91, 45);
+						}
+					}
+
+					.deleteButtonArea {
+						input {
+							margin-right: .5rem;
+							width: 3rem;
+							font-size: 1rem;
+							&::placeholder {
+								color: #999;
+							}
 						}
 					}
 				}
@@ -243,7 +244,6 @@ body {
 						align-items: center;
 					}
 				}
-
 			}
 		}
 	}
