@@ -23,6 +23,7 @@ export interface IBackendJob {
 }
 
 export interface IJobEditItem {
+	id: number|string;
 	title: string;
 	company: string;
 	url: string;
