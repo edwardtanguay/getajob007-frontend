@@ -1,4 +1,4 @@
-export interface IJob { 
+export interface IJob {
 	id: number;
 	title: string;
 	company: string;
@@ -8,6 +8,27 @@ export interface IJob {
 	skills: ISkill[];
 	todo: string;
 	userIsEditing: boolean;
+	editItem: IJobEditItem
+}
+
+export interface IBackendJob {
+	id: number;
+	title: string;
+	company: string;
+	url: string;
+	description: string;
+	skillList: string;
+	skills: ISkill[];
+	todo: string;
+}
+
+export interface IJobEditItem {
+	title: string;
+	company: string;
+	url: string;
+	description: string;
+	skillList: string;
+	todo: string;
 }
 
 export interface ISkill {

@@ -1,7 +1,13 @@
 import { useState, useEffect } from 'react';
 import { createContext } from 'react';
 import axios from 'axios';
-import { IJob, ITodo, ISkillTotal } from './interfaces';
+import {
+	IJob,
+	IBackendJob,
+	ITodo,
+	ISkillTotal,
+	IJobEditItem,
+} from './interfaces';
 
 interface IAppContext {
 	jobs: IJob[];
@@ -9,6 +15,12 @@ interface IAppContext {
 	skillTotals: ISkillTotal[];
 	handleToggleSkillTotal: (skillTotal: ISkillTotal) => void;
 	handleDeleteJob: (job: IJob) => void;
+	handleChangeFormField: (
+		value: string,
+		job: IJob,
+		fieldIdCode: string
+	) => void;
+	handleToggleEditStatus: (job: IJob) => void;
 }
 
 interface IAppProvider {
@@ -26,13 +38,21 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 	const loadJobs = async () => {
 		const rawJobs = (await axios.get(`${backendUrl}/jobs`)).data;
 		const _jobs: IJob[] = [];
-		rawJobs.forEach((rawJob:any) => {
+		rawJobs.forEach((rawJob: IBackendJob) => {
 			const _job: IJob = {
 				...rawJob,
-				userIsEditing: true
-			}
+				userIsEditing: false,
+				editItem: {
+					title: rawJob.title,
+					company: rawJob.company,
+					url: rawJob.url,
+					description: rawJob.description,
+					skillList: rawJob.skillList,
+					todo: rawJob.todo,
+				},
+			};
 			_jobs.push(_job);
-		})
+		});
 		setJobs(_jobs);
 	};
 	const loadTodos = async () => {
@@ -47,7 +67,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 			await axios.get(`${backendUrl}/skillTotals`)
 		).data;
 		_skillTotals.sort(
-			(a: ISkillTotal, b: ISkillTotal) => Number(b.total) - Number(a.total)
+			(a: ISkillTotal, b: ISkillTotal) =>
+				Number(b.total) - Number(a.total)
 		);
 		_skillTotals.forEach((_skillTotal) => {
 			_skillTotal.isOpen = false;
@@ -81,6 +102,15 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 		setSkillTotals([...skillTotals]);
 	};
 
+	const handleChangeFormField = (
+		value: string,
+		job: IJob,
+		fieldIdCode: string
+	) => {
+		job.editItem[fieldIdCode as keyof IJobEditItem] = value;
+		setJobs([...jobs]);
+	};
+
 	const handleDeleteJob = async (job: IJob) => {
 		try {
 			const res = await axios.delete(`${backendUrl}/jobs/${job.id}`);
@@ -100,6 +130,11 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 		}
 	};
 
+	const handleToggleEditStatus = (job: IJob) => {
+		job.userIsEditing = !job.userIsEditing;
+		setJobs([...jobs]);
+	};
+
 	return (
 		<AppContext.Provider
 			value={{
@@ -108,6 +143,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 				skillTotals: skillTotals,
 				handleToggleSkillTotal: handleToggleSkillTotal,
 				handleDeleteJob,
+				handleChangeFormField,
+				handleToggleEditStatus,
 			}}
 		>
 			{children}
