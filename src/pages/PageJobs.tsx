@@ -46,7 +46,7 @@ export const PageJobs = () => {
 															{skill.idCode}
 														</a>{' '}
 														- ADD TO BACKEND:
-														\src\data\skillInfos.json
+														\src\data\skills.json
 													</div>
 												</div>
 											)}

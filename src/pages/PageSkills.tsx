@@ -61,7 +61,7 @@ export const PageSkills = () => {
 										<div className="description">
 											create new entry in backend:
 											<br />
-											\src\data\skillInfos.json
+											\src\data\skills.json
 											<br />
 											<a
 												href={
