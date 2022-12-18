@@ -1,8 +1,14 @@
+$button-font-size: 1.1rem;
+
 body {
 	background-color: #333;
 	color: #ccc;
 	font-family: sans-serif;
 	padding: 0 1rem;
+
+	button {
+		font-size: $button-font-size;
+	}
 
 	h1 {
 		color: rgb(209, 168, 85);
@@ -103,6 +109,12 @@ body {
 
 	.pageJobs {
 		.jobs {
+			.jobsHeader {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				
+			}
 			.job {
 				background-color: #222;
 				padding: 1rem;
@@ -115,22 +127,14 @@ body {
 				.managePanel {
 					display: flex;
 					justify-content: space-between;
+					align-items: center;
 
-					button {
-						font-size: 1.1rem;
-					}
-
-					button.edit {
-						&:hover {
-							background-color: rgb(45, 91, 45);
-						}
-					}
 
 					.deleteButtonArea {
 						input {
 							margin-right: .5rem;
 							width: 3rem;
-							font-size: 1rem;
+							font-size: $button-font-size;
 							&::placeholder {
 								color: #999;
 							}

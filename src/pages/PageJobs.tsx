@@ -11,7 +11,10 @@ export const PageJobs = () => {
 	return (
 		<div className="page pageJobs">
 			<div className="jobs">
-				<h2>There are {jobs.length} jobs:</h2>
+				<div className="jobsHeader">
+					<h2>There are {jobs.length} jobs:</h2>
+					<button>Add</button>
+				</div>
 				{jobs.map((job: IJob) => {
 					return (
 						<React.Fragment key={job.id}>
