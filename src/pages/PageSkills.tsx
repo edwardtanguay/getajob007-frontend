@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { AppContext } from '../appContext';
+import '../styles/pageSkills.scss';
 
 export const PageSkills = () => {
 	const {

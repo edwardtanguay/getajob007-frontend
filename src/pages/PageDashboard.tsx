@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { AppContext } from '../appContext';
+import '../styles/pageDashboard.scss';
 
 export const PageDashboard = () => {
 	const { todos } = useContext(AppContext);

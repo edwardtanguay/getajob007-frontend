@@ -3,7 +3,8 @@ import { useContext } from 'react';
 import { AppContext } from '../appContext';
 import { DisplayJob } from '../components/DisplayJob';
 import { EditJob } from '../components/EditJob';
-import { IJob, ISkill } from '../interfaces';
+import { IJob } from '../interfaces';
+import '../styles/pageJobs.scss';
 
 export const PageJobs = () => {
 	const { jobs } = useContext(AppContext);

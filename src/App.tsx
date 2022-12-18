@@ -1,4 +1,4 @@
-import './App.scss';
+import './styles/App.scss';
 import { NavLink, Routes, Route, Navigate } from 'react-router-dom';
 import { PageDashboard } from './pages/PageDashboard';
 import { PageJobs } from './pages/PageJobs';
