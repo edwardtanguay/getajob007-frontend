@@ -1,1 +1,2 @@
-- ..refactor styles to pages
+- x refactor styles to pages
+- .. in edit mode, no add

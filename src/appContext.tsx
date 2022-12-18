@@ -22,6 +22,7 @@ interface IAppContext {
 	) => void;
 	handleToggleEditStatus: (job: IJob) => void;
 	handleSaveEditedJob: (job: IJob) => void;
+	anyJobIsBeingEdited: () => boolean;
 }
 
 interface IAppProvider {
@@ -51,7 +52,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 					description: rawJob.description,
 					skillList: rawJob.skillList,
 					todo: rawJob.todo,
-					pin: ''
+					pin: '',
 				},
 			};
 			_jobs.push(_job);
@@ -140,16 +141,14 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
 	const handleSaveEditedJob = async (job: IJob) => {
 		try {
-			const res = await axios.patch(`${backendUrl}/job`, job.editItem,
-				{
-					headers: {
-						'Content-Type': 'application/json'
-					}
-				}	
-			);
-			
+			const res = await axios.patch(`${backendUrl}/job`, job.editItem, {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+
 			if ((res.status = 200)) {
-				console.log('loading jobs')
+				console.log('loading jobs');
 				await loadJobs();
 				await loadTodos();
 				await loadSkillTotals();
@@ -163,7 +162,19 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 				console.error(`ERROR: ${message}`);
 			}
 		}
-	}
+	};
+
+	const anyJobIsBeingEdited = () => {
+		// jobs.forEach((job) => {
+		for (const job of jobs) {
+			console.log(job.userIsEditing);
+			if (job.userIsEditing) {
+				console.log('true');
+				return true;
+			}
+		}
+		return false;
+	};
 
 	return (
 		<AppContext.Provider
@@ -175,7 +186,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 				handleDeleteJob,
 				handleChangeFormField,
 				handleToggleEditStatus,
-handleSaveEditedJob
+				handleSaveEditedJob,
+				anyJobIsBeingEdited,
 			}}
 		>
 			{children}

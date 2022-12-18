@@ -7,14 +7,14 @@ import { IJob } from '../interfaces';
 import '../styles/pageJobs.scss';
 
 export const PageJobs = () => {
-	const { jobs } = useContext(AppContext);
+	const { jobs, anyJobIsBeingEdited } = useContext(AppContext);
 
 	return (
 		<div className="page pageJobs">
 			<div className="jobs">
 				<div className="jobsHeader">
 					<h2>There are {jobs.length} jobs:</h2>
-					<button>Add</button>
+					{!anyJobIsBeingEdited() && <button>Add</button>}
 				</div>
 				{jobs.map((job: IJob) => {
 					return (
