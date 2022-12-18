@@ -3,11 +3,11 @@ import { useContext } from 'react';
 import { AppContext } from '../appContext';
 import { DisplayJob } from '../components/DisplayJob';
 import { JobForm } from '../components/JobForm';
-import { IJob } from '../interfaces';
+import { IJob, FormAction } from '../interfaces';
 import '../styles/pageJobs.scss';
 
 export const PageJobs = () => {
-	const { jobs, anyJobIsBeingEdited } = useContext(AppContext);
+	const { jobs, anyJobIsBeingEdited} = useContext(AppContext);
 
 	return (
 		<div className="page pageJobs">
@@ -20,7 +20,7 @@ export const PageJobs = () => {
 					return (
 						<React.Fragment key={job.id}>
 							{job.userIsEditing ? (
-								<JobForm job={job} />
+								<JobForm job={job} formAction={FormAction.Edit} />
 							) : (
 								<DisplayJob job={job} />
 							)}

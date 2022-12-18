@@ -1,14 +1,21 @@
 import { useContext } from 'react';
 import { AppContext } from '../appContext';
-import { IJob } from '../interfaces';
+import { IJob, FormAction } from '../interfaces';
 
 interface IProps {
 	job: IJob;
+	formAction: FormAction;
 }
 
-export const JobForm = ({ job }: IProps) => {
-	const { jobs, handleChangeFormField, handleToggleEditStatus, handleSaveEditedJob } =
-		useContext(AppContext);
+export const JobForm = ({ job, formAction }: IProps) => {
+	const {
+		jobs,
+		handleChangeFormField,
+		handleToggleEditStatus,
+		handleSaveEditedJob,
+		handleToggleAddStatus,
+		handleSaveAddedJob,
+	} = useContext(AppContext);
 
 	return (
 		<form>
@@ -116,10 +123,37 @@ export const JobForm = ({ job }: IProps) => {
 					</div>
 				</div>
 				<div className="buttonRow">
-					<button type="button" onClick={() => handleToggleEditStatus(job)}>
-						Clear
-					</button>
-					<button type="button" onClick={() => handleSaveEditedJob(job)}>Save</button>
+					{formAction === FormAction.Edit ? (
+						<>
+							<button
+								type="button"
+								onClick={() => handleToggleEditStatus(job)}
+							>
+								Clear
+							</button>
+							<button
+								type="button"
+								onClick={() => handleSaveEditedJob(job)}
+							>
+								Save
+							</button>
+						</>
+					) : (
+						<>
+							<button
+								type="button"
+								onClick={() => handleToggleAddStatus(job)}
+							>
+								Clear
+							</button>
+							<button
+								type="button"
+								onClick={() => handleSaveAddedJob(job)}
+							>
+								Save
+							</button>
+						</>
+					)}
 				</div>
 			</fieldset>
 		</form>

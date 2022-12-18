@@ -21,7 +21,9 @@ interface IAppContext {
 		fieldIdCode: string
 	) => void;
 	handleToggleEditStatus: (job: IJob) => void;
+	handleToggleAddStatus: (job: IJob) => void;
 	handleSaveEditedJob: (job: IJob) => void;
+	handleSaveAddedJob: (job: IJob) => void;
 	anyJobIsBeingEdited: () => boolean;
 }
 
@@ -139,6 +141,11 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 		setJobs([...jobs]);
 	};
 
+	const handleToggleAddStatus = (job: IJob) => {
+		// job.userIsEditing = !job.userIsEditing;
+		// setJobs([...jobs]);
+	};
+
 	const handleSaveEditedJob = async (job: IJob) => {
 		try {
 			const res = await axios.patch(`${backendUrl}/job`, job.editItem, {
@@ -164,6 +171,31 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 		}
 	};
 
+	const handleSaveAddedJob = async (job: IJob) => {
+		// try {
+		// 	const res = await axios.patch(`${backendUrl}/job`, job.editItem, {
+		// 		headers: {
+		// 			'Content-Type': 'application/json',
+		// 		},
+		// 	});
+
+		// 	if ((res.status = 200)) {
+		// 		console.log('loading jobs');
+		// 		await loadJobs();
+		// 		await loadTodos();
+		// 		await loadSkillTotals();
+		// 	} else {
+		// 		console.log(res);
+		// 	}
+		// } catch (e: any) {
+		// 	console.error(`ERROR: ${e.message}`);
+		// 	const message = e.response.data.message;
+		// 	if (message) {
+		// 		console.error(`ERROR: ${message}`);
+		// 	}
+		// }
+	};
+
 	const anyJobIsBeingEdited = () => {
 		// jobs.forEach((job) => {
 		for (const job of jobs) {
@@ -186,7 +218,9 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 				handleDeleteJob,
 				handleChangeFormField,
 				handleToggleEditStatus,
+				handleToggleAddStatus,
 				handleSaveEditedJob,
+				handleSaveAddedJob,
 				anyJobIsBeingEdited,
 			}}
 		>

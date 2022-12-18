@@ -53,3 +53,8 @@ export interface ISkillTotal {
 	isOpen: boolean;
 	lookupInfoLink: string;
 }
+
+export enum FormAction {
+	Edit,
+	Add
+}
