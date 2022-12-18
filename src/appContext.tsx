@@ -25,6 +25,8 @@ interface IAppContext {
 	handleSaveEditedJob: (job: IJob) => void;
 	handleSaveAddedJob: (job: IJob) => void;
 	anyJobIsBeingEdited: () => boolean;
+	isAdding: boolean;
+	toggleAddingForm: () => void;
 }
 
 interface IAppProvider {
@@ -38,6 +40,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 	const [jobs, setJobs] = useState<IJob[]>([]);
 	const [todos, setTodos] = useState<ITodo[]>([]);
 	const [skillTotals, setSkillTotals] = useState<ISkillTotal[]>([]);
+	const [isAdding, setIsAdding] = useState(false);
 
 	const loadJobs = async () => {
 		const rawJobs = (await axios.get(`${backendUrl}/jobs`)).data;
@@ -178,7 +181,6 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 		// 			'Content-Type': 'application/json',
 		// 		},
 		// 	});
-
 		// 	if ((res.status = 200)) {
 		// 		console.log('loading jobs');
 		// 		await loadJobs();
@@ -208,6 +210,10 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 		return false;
 	};
 
+	const toggleAddingForm = () => {
+		setIsAdding(!isAdding);
+	};
+
 	return (
 		<AppContext.Provider
 			value={{
@@ -222,6 +228,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 				handleSaveEditedJob,
 				handleSaveAddedJob,
 				anyJobIsBeingEdited,
+				isAdding,
+				toggleAddingForm,
 			}}
 		>
 			{children}

@@ -7,21 +7,26 @@ import { IJob, FormAction, addingJob } from '../interfaces';
 import '../styles/pageJobs.scss';
 
 export const PageJobs = () => {
-	const { jobs, anyJobIsBeingEdited} = useContext(AppContext);
+	const { jobs, anyJobIsBeingEdited, isAdding, toggleAddingForm } = useContext(AppContext);
 
 	return (
 		<div className="page pageJobs">
 			<div className="jobs">
 				<div className="jobsHeader">
 					<h2>There are {jobs.length} jobs:</h2>
-					{!anyJobIsBeingEdited() && <button>Add</button>}
+					{!anyJobIsBeingEdited() && !isAdding && <button onClick={toggleAddingForm}>Add</button>}
 				</div>
-				<JobForm job={addingJob} formAction={FormAction.Add}/>
+				{isAdding && (
+					<JobForm job={addingJob} formAction={FormAction.Add} />
+				)}
 				{jobs.map((job: IJob) => {
 					return (
 						<React.Fragment key={job.id}>
 							{job.userIsEditing ? (
-								<JobForm job={job} formAction={FormAction.Edit} />
+								<JobForm
+									job={job}
+									formAction={FormAction.Edit}
+								/>
 							) : (
 								<DisplayJob job={job} />
 							)}

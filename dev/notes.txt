@@ -1,5 +1,9 @@
 - x refactor styles to pages
 - x in edit mode, no add
-- .. refactor rows
+- x refactor rows
+- x toggle on add button click
+
+- fix clear button on edit form
+- make add form work
 
 - make edit form use a full IJob object
