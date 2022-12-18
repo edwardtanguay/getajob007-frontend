@@ -1,2 +1,3 @@
 - x refactor styles to pages
-- .. in edit mode, no add
+- x in edit mode, no add
+- .. refactor rows

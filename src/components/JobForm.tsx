@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 import { AppContext } from '../appContext';
 import { IJob, FormAction } from '../interfaces';
+import { JobFormRowLine } from './JobFormRowLine';
+import { JobFormRowParagraph } from './JobFormRowParagraph';
 
 interface IProps {
 	job: IJob;
@@ -22,106 +24,13 @@ export const JobForm = ({ job, formAction }: IProps) => {
 			<fieldset>
 				<legend>Editing Job</legend>
 
-				<div className="row">
-					<label>Title</label>
-					<div>
-						<input
-							value={job.editItem.title}
-							type="text"
-							onChange={(e) =>
-								handleChangeFormField(
-									e.target.value,
-									job,
-									'title'
-								)
-							}
-						/>
-					</div>
-				</div>
+				<JobFormRowLine label="Title" fieldIdCode="title" value={job.editItem.title} job={job} />
+				<JobFormRowLine label="Company" fieldIdCode="company" value={job.editItem.company} job={job} />
+				<JobFormRowLine label="URL" fieldIdCode="url" value={job.editItem.url} job={job} />
+				<JobFormRowParagraph label="Description" fieldIdCode="description" value={job.editItem.description} job={job} />
+				<JobFormRowLine label="Skill List" fieldIdCode="skillList" value={job.editItem.skillList} job={job} />
+				<JobFormRowLine label="Next Todo" fieldIdCode="todo" value={job.editItem.todo} job={job} />
 
-				<div className="row">
-					<label>Company</label>
-					<div>
-						<input
-							value={job.editItem.company}
-							type="text"
-							onChange={(e) =>
-								handleChangeFormField(
-									e.target.value,
-									job,
-									'company'
-								)
-							}
-						/>
-					</div>
-				</div>
-
-				<div className="row">
-					<label>URL</label>
-					<div>
-						<input
-							value={job.editItem.url}
-							type="text"
-							onChange={(e) =>
-								handleChangeFormField(
-									e.target.value,
-									job,
-									'url'
-								)
-							}
-						/>
-					</div>
-				</div>
-
-				<div className="row">
-					<label>Description</label>
-					<div>
-						<textarea
-							value={job.editItem.description}
-							onChange={(e) =>
-								handleChangeFormField(
-									e.target.value,
-									job,
-									'description'
-								)
-							}
-						/>
-					</div>
-				</div>
-
-				<div className="row">
-					<label>Skill List</label>
-					<div>
-						<input
-							value={job.editItem.skillList}
-							type="text"
-							onChange={(e) =>
-								handleChangeFormField(
-									e.target.value,
-									job,
-									'skillList'
-								)
-							}
-						/>
-					</div>
-				</div>
-
-				<div className="row">
-					<label>Next Todo</label>
-					<div>
-						<input
-							value={job.editItem.todo}
-							type="text"
-							onChange={(e) =>
-								handleChangeFormField(
-									e.target.value,
-									job,
-									'todo'
-								)
-							}
-						/>
-					</div>
-				</div>
 				<div className="buttonRow">
 					{formAction === FormAction.Edit ? (
 						<>
