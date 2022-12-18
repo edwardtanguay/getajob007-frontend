@@ -11,8 +11,6 @@ interface IProps {
 
 export const JobForm = ({ job, formAction }: IProps) => {
 	const {
-		jobs,
-		handleChangeFormField,
 		handleToggleEditStatus,
 		handleSaveEditedJob,
 		handleToggleAddStatus,
@@ -20,7 +18,7 @@ export const JobForm = ({ job, formAction }: IProps) => {
 	} = useContext(AppContext);
 
 	return (
-		<form>
+		<form className={formAction.toString()}>
 			<fieldset>
 				<legend>Editing Job</legend>
 

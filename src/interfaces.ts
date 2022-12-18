@@ -55,6 +55,6 @@ export interface ISkillTotal {
 }
 
 export enum FormAction {
-	Edit,
-	Add
+	Edit = 'formActionEdit',
+	Add = 'formActionAdd'
 }
