@@ -11,6 +11,28 @@ export interface IJob {
 	editItem: IJobEditItem
 }
 
+export const addingJob: IJob = {
+	id: 0,
+	title: '',
+	company: '',
+	url: '',
+	description: '',
+	skillList: '',
+	skills: [],
+	todo: '',
+	userIsEditing: false,
+	editItem: {
+		id: 0,
+		title: '',
+		company: '',
+		url: '',
+		description: '',
+		skillList: '',
+		todo: '',
+		pin: ''
+	}
+}
+
 export interface IBackendJob {
 	id: number;
 	title: string;
@@ -23,7 +45,7 @@ export interface IBackendJob {
 }
 
 export interface IJobEditItem {
-	id: number|string;
+	id: number | string;
 	title: string;
 	company: string;
 	url: string;

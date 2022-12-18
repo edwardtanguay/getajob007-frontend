@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { AppContext } from '../appContext';
 import { DisplayJob } from '../components/DisplayJob';
 import { JobForm } from '../components/JobForm';
-import { IJob, FormAction } from '../interfaces';
+import { IJob, FormAction, addingJob } from '../interfaces';
 import '../styles/pageJobs.scss';
 
 export const PageJobs = () => {
@@ -16,6 +16,7 @@ export const PageJobs = () => {
 					<h2>There are {jobs.length} jobs:</h2>
 					{!anyJobIsBeingEdited() && <button>Add</button>}
 				</div>
+				<JobForm job={addingJob} formAction={FormAction.Add}/>
 				{jobs.map((job: IJob) => {
 					return (
 						<React.Fragment key={job.id}>

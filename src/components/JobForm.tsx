@@ -20,7 +20,12 @@ export const JobForm = ({ job, formAction }: IProps) => {
 	return (
 		<form className={formAction.toString()}>
 			<fieldset>
-				<legend>Editing Job</legend>
+				{formAction === FormAction.Edit && (
+					<legend>Editing Job</legend>
+				)}
+				{formAction === FormAction.Add && (
+					<legend>Adding Job</legend>
+				)}
 
 				<JobFormRowLine label="Title" fieldIdCode="title" value={job.editItem.title} job={job} />
 				<JobFormRowLine label="Company" fieldIdCode="company" value={job.editItem.company} job={job} />
