@@ -6,7 +6,7 @@ interface IProps {
 	job: IJob;
 }
 
-export const EditJob = ({ job }: IProps) => {
+export const JobForm = ({ job }: IProps) => {
 	const { jobs, handleChangeFormField, handleToggleEditStatus, handleSaveEditedJob } =
 		useContext(AppContext);
 

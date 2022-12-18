@@ -2,7 +2,7 @@ import React from 'react';
 import { useContext } from 'react';
 import { AppContext } from '../appContext';
 import { DisplayJob } from '../components/DisplayJob';
-import { EditJob } from '../components/EditJob';
+import { JobForm } from '../components/JobForm';
 import { IJob } from '../interfaces';
 import '../styles/pageJobs.scss';
 
@@ -20,7 +20,7 @@ export const PageJobs = () => {
 					return (
 						<React.Fragment key={job.id}>
 							{job.userIsEditing ? (
-								<EditJob job={job} />
+								<JobForm job={job} />
 							) : (
 								<DisplayJob job={job} />
 							)}
