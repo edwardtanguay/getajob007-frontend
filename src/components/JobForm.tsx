@@ -54,13 +54,13 @@ export const JobForm = ({ job, formAction }: IProps) => {
 						<>
 							<button
 								type="button"
-								onClick={() => handleToggleAddStatus(job)}
+								onClick={() => handleToggleAddStatus()}
 							>
 								Clear
 							</button>
 							<button
 								type="button"
-								onClick={() => handleSaveAddedJob(job)}
+								onClick={() => handleSaveAddedJob()}
 							>
 								Save
 							</button>

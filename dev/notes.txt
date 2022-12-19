@@ -3,9 +3,9 @@
 - x refactor rows
 - x toggle on add button click
 
-- .. fix clear button on edit form
-- make add form work
-	- clear button
+- x fix clear button on edit form
+- .. make add form work
+	- .. clear button
 	- save button
 		- backend route
 

@@ -7,7 +7,9 @@ import {
 	ITodo,
 	ISkillTotal,
 	IJobEditItem,
+	blankJob,
 } from './interfaces';
+import { cloneDeep } from 'lodash-es';
 
 interface IAppContext {
 	jobs: IJob[];
@@ -21,13 +23,14 @@ interface IAppContext {
 		fieldIdCode: string
 	) => void;
 	handleToggleEditStatus: (job: IJob) => void;
-	handleToggleAddStatus: (job: IJob) => void;
+	handleToggleAddStatus: () => void;
 	handleSaveEditedJob: (job: IJob) => void;
-	handleSaveAddedJob: (job: IJob) => void;
+	handleSaveAddedJob: () => void;
 	anyJobIsBeingEdited: () => boolean;
 	isAdding: boolean;
 	toggleAddingForm: () => void;
 	pin: string;
+	addingJob: IJob;
 }
 
 interface IAppProvider {
@@ -42,6 +45,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 	const [todos, setTodos] = useState<ITodo[]>([]);
 	const [skillTotals, setSkillTotals] = useState<ISkillTotal[]>([]);
 	const [isAdding, setIsAdding] = useState(false);
+	const [addingJob, setAddingJob] = useState(cloneDeep(blankJob));
 	const [pin, setPin] = useState('');
 
 	const loadJobs = async () => {
@@ -142,21 +146,21 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
 	const handleToggleEditStatus = (job: IJob) => {
 		job.userIsEditing = !job.userIsEditing;
-		(job.editItem = {
+		job.editItem = {
 			id: job.id,
 			title: job.title,
 			company: job.company,
 			url: job.url,
 			description: job.description,
 			skillList: job.skillList,
-			todo: job.todo
-		}),
-			setJobs([...jobs]);
+			todo: job.todo,
+		};
+		setJobs([...jobs]);
 	};
 
-	const handleToggleAddStatus = (job: IJob) => {
-		// job.userIsEditing = !job.userIsEditing;
-		// setJobs([...jobs]);
+	const handleToggleAddStatus = () => {
+		setAddingJob({...blankJob});
+		setIsAdding(!isAdding);
 	};
 
 	const handleSaveEditedJob = async (job: IJob) => {
@@ -184,7 +188,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 		}
 	};
 
-	const handleSaveAddedJob = async (job: IJob) => {
+	const handleSaveAddedJob = async () => {
 		// try {
 		// 	const res = await axios.patch(`${backendUrl}/job`, job.editItem, {
 		// 		headers: {
@@ -211,7 +215,6 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 	const anyJobIsBeingEdited = () => {
 		// jobs.forEach((job) => {
 		for (const job of jobs) {
-			console.log(job.userIsEditing);
 			if (job.userIsEditing) {
 				console.log('true');
 				return true;
@@ -240,7 +243,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 				anyJobIsBeingEdited,
 				isAdding,
 				toggleAddingForm,
-				pin
+				pin,
+				addingJob
 			}}
 		>
 			{children}

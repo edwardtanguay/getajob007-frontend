@@ -11,7 +11,7 @@ export interface IJob {
 	editItem: IJobEditItem
 }
 
-export const addingJob: IJob = {
+export const blankJob: IJob = {
 	id: 0,
 	title: '',
 	company: '',
@@ -77,4 +77,14 @@ export interface ISkillTotal {
 export enum FormAction {
 	Edit = 'formActionEdit',
 	Add = 'formActionAdd'
+}
+
+export const blankJobEditItem: IJobEditItem = {
+	id: 0,
+	title: '',
+	company: '',
+	url: '',
+	description: '',
+	skillList: '',
+	todo: '',
 }
