@@ -3,7 +3,10 @@
 - x refactor rows
 - x toggle on add button click
 
-- fix clear button on edit form
+- .. fix clear button on edit form
 - make add form work
+	- clear button
+	- save button
+		- backend route
 
 - make edit form use a full IJob object

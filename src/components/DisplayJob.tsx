@@ -12,6 +12,7 @@ export const DisplayJob = ({ job }: IProps) => {
 		handleDeleteJob,
 		handleToggleEditStatus,
 		handleChangeFormField,
+		pin
 	} = useContext(AppContext);
 
 	return (
@@ -70,7 +71,7 @@ export const DisplayJob = ({ job }: IProps) => {
 						}
 					/>
 					<button
-						disabled={job.editItem.pin.trim() === ''}
+						disabled={pin.trim() === ''}
 						className="delete"
 						onClick={() => handleDeleteJob(job)}
 					>

@@ -27,6 +27,7 @@ interface IAppContext {
 	anyJobIsBeingEdited: () => boolean;
 	isAdding: boolean;
 	toggleAddingForm: () => void;
+	pin: string;
 }
 
 interface IAppProvider {
@@ -41,6 +42,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 	const [todos, setTodos] = useState<ITodo[]>([]);
 	const [skillTotals, setSkillTotals] = useState<ISkillTotal[]>([]);
 	const [isAdding, setIsAdding] = useState(false);
+	const [pin, setPin] = useState('');
 
 	const loadJobs = async () => {
 		const rawJobs = (await axios.get(`${backendUrl}/jobs`)).data;
@@ -57,7 +59,6 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 					description: rawJob.description,
 					skillList: rawJob.skillList,
 					todo: rawJob.todo,
-					pin: '',
 				},
 			};
 			_jobs.push(_job);
@@ -141,7 +142,16 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
 	const handleToggleEditStatus = (job: IJob) => {
 		job.userIsEditing = !job.userIsEditing;
-		setJobs([...jobs]);
+		(job.editItem = {
+			id: job.id,
+			title: job.title,
+			company: job.company,
+			url: job.url,
+			description: job.description,
+			skillList: job.skillList,
+			todo: job.todo
+		}),
+			setJobs([...jobs]);
 	};
 
 	const handleToggleAddStatus = (job: IJob) => {
@@ -230,6 +240,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 				anyJobIsBeingEdited,
 				isAdding,
 				toggleAddingForm,
+				pin
 			}}
 		>
 			{children}
