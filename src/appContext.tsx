@@ -159,7 +159,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 	};
 
 	const handleToggleAddStatus = () => {
-		setAddingJob({...blankJob});
+		setAddingJob(cloneDeep(blankJob));
 		setIsAdding(!isAdding);
 	};
 
