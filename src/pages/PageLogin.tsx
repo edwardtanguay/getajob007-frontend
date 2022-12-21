@@ -37,11 +37,11 @@ export const PageLogin = () => {
 								will see edit/add/delete buttons next to which
 								you will have to enter your PIN each time you
 								use them.
-							</div>
+							</div> 
 						</>
 					) : (
 						<div className="messageLoggedIn">
-								<div>You are now identified as admin.<br/><br/>You will now see edit, delete and add buttons on this site. To use them. You will have to type in your PIN again for each time you use one of these buttons.</div>
+								<div>You are identified as admin.<br /><br />Each time you want to change data on this site, you will have to type in your PIN again in the input box next to the appropriate button.</div>
 								<button type="button">Logout</button>
 						</div>
 					)}
