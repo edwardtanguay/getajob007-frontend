@@ -16,7 +16,9 @@
 	- x first with test.rest
 	- x frontend
 - x pin on add
-- .. pin on edit
+- x pin on edit
+- .. make admin login
+	- .. page
 - update howto
 - publish to hetzner
 - update howto with hetzner

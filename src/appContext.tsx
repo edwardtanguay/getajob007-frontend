@@ -179,26 +179,32 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
 	const handleSaveEditedJob = async (job: IJob) => {
 		try {
-			const res = await axios.patch(`${backendUrl}/job`, job.editItem, {
-				headers: {
-					'Content-Type': 'application/json',
+			const res = await axios.patch(
+				`${backendUrl}/job`,
+				{
+					job: job.editItem,
+					pin,
 				},
-			});
+				{
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				}
+			);
 
 			if (res.status === 200) {
-				console.log('loading jobs');
 				await loadJobs();
 				await loadTodos();
 				await loadSkillTotals();
 			} else {
 				console.log(res);
 			}
+			job.userIsEditing = !job.userIsEditing;
+			setPin('');
 		} catch (e: any) {
-			console.error(`ERROR: ${e.message}`);
 			const message = e.response.data.message;
-			if (message) {
-				console.error(`ERROR: ${message}`);
-			}
+			notify(message);
+			setPin('');
 		}
 	};
 
@@ -223,17 +229,13 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 			} else {
 				console.log(res);
 			}
-			console.log(addingJob);
-			notify(`Job "${addingJob.editItem.title}" added.`)
+			notify(`Job "${addingJob.editItem.title}" added.`);
 			setAddingJob(cloneDeep(blankJob));
 			setIsAdding(false);
 			setPin('');
 		} catch (e: any) {
 			const message = e.response.data.message;
 			notify(message);
-			if (message) {
-				console.error(`ERROR: ${message}`);
-			}
 			setPin('');
 		}
 	};
