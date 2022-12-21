@@ -152,6 +152,23 @@
 					display: flex;
 					align-items: center;
 				}
+
+				.saveButtonArea {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+
+					input {
+						margin-right: .5rem;
+						width: 3rem;
+						font-size: v.$button-font-size;
+						margin-top: 1rem;
+
+						&::placeholder {
+							color: #999;
+						}
+					}
+				}
 			}
 		}
 	}

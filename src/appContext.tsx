@@ -39,7 +39,7 @@ interface IAppProvider {
 	children: React.ReactNode;
 }
 
-const notify = () => toast("Wow so easy!");
+const notify = (message: string) => toast(message);
 
 const backendUrl = 'http://localhost:3011';
 export const AppContext = createContext<IAppContext>({} as IAppContext);
@@ -140,7 +140,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 				},
 			});
 
-			if ((res.status = 200)) {
+			if (res.status === 200) {
 				await loadJobs();
 				await loadTodos();
 				await loadSkillTotals();
@@ -150,7 +150,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 			}
 		} catch (e: any) {
 			const message = e.response.data.message;
-			notify();
+			notify(message);
 			if (message) {
 				console.error(`ERROR: ${message}`);
 			}
@@ -185,7 +185,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 				},
 			});
 
-			if ((res.status = 200)) {
+			if (res.status === 200) {
 				console.log('loading jobs');
 				await loadJobs();
 				await loadTodos();
@@ -206,29 +206,36 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 		try {
 			const res = await axios.post(
 				`${backendUrl}/job`,
-				addingJob.editItem,
+				{
+					job: addingJob.editItem,
+					pin,
+				},
 				{
 					headers: {
 						'Content-Type': 'application/json',
 					},
 				}
 			);
-			if ((res.status = 200)) {
+			if (res.status === 200) {
 				await loadJobs();
 				await loadTodos();
 				await loadSkillTotals();
 			} else {
 				console.log(res);
 			}
+			console.log(addingJob);
+			notify(`Job "${addingJob.editItem.title}" added.`)
+			setAddingJob(cloneDeep(blankJob));
+			setIsAdding(false);
+			setPin('');
 		} catch (e: any) {
-			console.error(`ERROR: ${e.message}`);
 			const message = e.response.data.message;
+			notify(message);
 			if (message) {
 				console.error(`ERROR: ${message}`);
 			}
+			setPin('');
 		}
-		setAddingJob(cloneDeep(blankJob));
-		setIsAdding(false);
 	};
 
 	const anyJobIsBeingEdited = () => {

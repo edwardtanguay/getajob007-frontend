@@ -12,7 +12,10 @@
 	- x save button
 	- x add  "publicationDate": "2022-12-07",
 - x test add/delete
-- .. add pin feature
+- x add pin feature
 	- x first with test.rest
-	- .. frontend
+	- x frontend
+- .. pin on add
+- update howto
 - publish to hetzner
+- update howto with hetzner

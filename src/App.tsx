@@ -9,7 +9,18 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
 	return (
 		<div className="App">
-			<ToastContainer />
+			<ToastContainer
+				position="top-right"
+				autoClose={3000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="dark"
+			/>
 			<h1>Get a Job</h1>
 			<nav>
 				<NavLink to="/dashboard">Dashboard</NavLink>
@@ -21,7 +32,10 @@ function App() {
 				<Route path="/dashboard" element={<PageDashboard />} />
 				<Route path="/jobs" element={<PageJobs />} />
 				<Route path="/skills" element={<PageSkills />} />
-				<Route path="/" element={<Navigate to="/dashboard" replace />} />
+				<Route
+					path="/"
+					element={<Navigate to="/dashboard" replace />}
+				/>
 			</Routes>
 		</div>
 	);
