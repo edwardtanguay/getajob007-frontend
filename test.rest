@@ -50,3 +50,11 @@ content-type: application/json
 	}, 
 	"pin": "nnn"
 }
+
+### identify as admin
+POST {{url}}/identify-as-admin
+content-type: application/json
+
+{
+	"pin": "nnn"
+}

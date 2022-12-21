@@ -18,7 +18,8 @@
 - x pin on add
 - x pin on edit
 - .. make admin login
-	- .. page
+	- x page
+	- .. route: identify-as-admin
 - update howto
 - publish to hetzner
 - update howto with hetzner
