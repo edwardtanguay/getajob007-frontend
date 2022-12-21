@@ -22,3 +22,6 @@ content-type: application/json
 	"skillList": "sss",
 	"todo": "ttt"
 }
+
+### test route (replace with vitest later)
+{{url}}/test

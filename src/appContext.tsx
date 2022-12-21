@@ -17,6 +17,9 @@ interface IAppContext {
 	skillTotals: ISkillTotal[];
 	handleToggleSkillTotal: (skillTotal: ISkillTotal) => void;
 	handleDeleteJob: (job: IJob) => void;
+	handleChangePin: (
+		value: string
+	) => void;
 	handleChangeFormField: (
 		value: string,
 		job: IJob,
@@ -189,27 +192,28 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 	};
 
 	const handleSaveAddedJob = async () => {
-		// try {
-		// 	const res = await axios.patch(`${backendUrl}/job`, job.editItem, {
-		// 		headers: {
-		// 			'Content-Type': 'application/json',
-		// 		},
-		// 	});
-		// 	if ((res.status = 200)) {
-		// 		console.log('loading jobs');
-		// 		await loadJobs();
-		// 		await loadTodos();
-		// 		await loadSkillTotals();
-		// 	} else {
-		// 		console.log(res);
-		// 	}
-		// } catch (e: any) {
-		// 	console.error(`ERROR: ${e.message}`);
-		// 	const message = e.response.data.message;
-		// 	if (message) {
-		// 		console.error(`ERROR: ${message}`);
-		// 	}
-		// }
+		try {
+			const res = await axios.post(`${backendUrl}/job`, addingJob.editItem, {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+			if ((res.status = 200)) {
+				await loadJobs();
+				await loadTodos();
+				await loadSkillTotals();
+			} else {
+				console.log(res);
+			}
+		} catch (e: any) {
+			console.error(`ERROR: ${e.message}`);
+			const message = e.response.data.message;
+			if (message) {
+				console.error(`ERROR: ${message}`);
+			}
+		}
+		setAddingJob(cloneDeep(blankJob));
+		setIsAdding(false);
 	};
 
 	const anyJobIsBeingEdited = () => {
@@ -226,6 +230,10 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 	const toggleAddingForm = () => {
 		setIsAdding(!isAdding);
 	};
+
+	const handleChangePin = (pin: string) => {
+		setPin(pin);
+	}
 
 	return (
 		<AppContext.Provider
@@ -244,7 +252,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 				isAdding,
 				toggleAddingForm,
 				pin,
-				addingJob
+				addingJob,
+				handleChangePin
 			}}
 		>
 			{children}

@@ -11,7 +11,7 @@ export const DisplayJob = ({ job }: IProps) => {
 		jobs,
 		handleDeleteJob,
 		handleToggleEditStatus,
-		handleChangeFormField,
+		handleChangePin,
 		pin
 	} = useContext(AppContext);
 
@@ -67,7 +67,7 @@ export const DisplayJob = ({ job }: IProps) => {
 						placeholder="PIN"
 						type="password"
 						onChange={(e) =>
-							handleChangeFormField(e.target.value, job, 'pin')
+							handleChangePin(e.target.value)
 						}
 					/>
 					<button

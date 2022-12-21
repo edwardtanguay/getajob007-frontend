@@ -4,9 +4,14 @@
 - x toggle on add button click
 
 - x fix clear button on edit form
+- .. make delete work again
 - .. make add form work
 	- x clear button
-	- .. save button
-		- .. backend route
+	- x create backend route
+	- x test with postman
+	- x save button
+	- x add  "publicationDate": "2022-12-07",
+- test add/delete
 
-- make edit form use a full IJob object
+- add pins
+- publish to hetzner
