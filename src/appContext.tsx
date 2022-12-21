@@ -35,6 +35,7 @@ interface IAppContext {
 	addingJob: IJob;
 	setPin: Dispatch<SetStateAction<string>>;
 	prePageLoad: () => void;
+	isAdmin: boolean
 }
 
 interface IAppProvider {
@@ -53,6 +54,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 	const [isAdding, setIsAdding] = useState(false);
 	const [addingJob, setAddingJob] = useState(cloneDeep(blankJob));
 	const [pin, setPin] = useState('');
+	const [isAdmin, setIsAdmin] = useState(false);
 
 	const loadJobs = async () => {
 		const rawJobs = (await axios.get(`${backendUrl}/jobs`)).data;
@@ -285,7 +287,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 				addingJob,
 				handleChangePin,
 				setPin,
-				prePageLoad
+				prePageLoad,
+				isAdmin
 			}}
 		>
 			{children}
