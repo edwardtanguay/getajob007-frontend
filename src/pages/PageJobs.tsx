@@ -7,19 +7,32 @@ import { IJob, FormAction } from '../interfaces';
 import '../styles/pageJobs.scss';
 
 export const PageJobs = () => {
-	const { jobs, anyJobIsBeingEdited, isAdding, toggleAddingForm, addingJob, prePageLoad } = useContext(AppContext);
+	const {
+		jobs,
+		anyJobIsBeingEdited,
+		isAdding,
+		toggleAddingForm,
+		addingJob,
+		prePageLoad,
+		isAdmin
+	} = useContext(AppContext);
 
 	useEffect(() => {
 		prePageLoad();
-	},[]);
-
+	}, []);
 
 	return (
 		<div className="page pageJobs">
 			<div className="jobs">
 				<div className="jobsHeader">
 					<h2>There are {jobs.length} jobs:</h2>
-					{!anyJobIsBeingEdited() && !isAdding && <button onClick={toggleAddingForm}>Add</button>}
+					{isAdmin && (
+						<>
+							{!anyJobIsBeingEdited() && !isAdding && (
+								<button onClick={toggleAddingForm}>Add</button>
+							)}
+						</>
+					)}
 				</div>
 				{isAdding && (
 					<JobForm job={addingJob} formAction={FormAction.Add} />

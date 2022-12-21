@@ -12,7 +12,8 @@ export const DisplayJob = ({ job }: IProps) => {
 		handleDeleteJob,
 		handleToggleEditStatus,
 		handleChangePin,
-		pin
+		pin,
+		isAdmin,
 	} = useContext(AppContext);
 
 	return (
@@ -46,8 +47,14 @@ export const DisplayJob = ({ job }: IProps) => {
 											target="_blank"
 										>
 											{skill.idCode}
-										</a>{' '}
-										- ADD TO BACKEND: \src\data\skills.json
+										</a>
+										{isAdmin && (
+											<>
+												{' '}
+												- ADD TO BACKEND:
+												\src\data\db.json
+											</>
+										)}
 									</div>
 								</div>
 							)}
@@ -55,31 +62,31 @@ export const DisplayJob = ({ job }: IProps) => {
 					);
 				})}
 			</div>
-			<div className="managePanel">
-				<button
-					className="edit"
-					onClick={() => handleToggleEditStatus(job)}
-				>
-					Edit
-				</button>
-				<div className="deleteButtonArea">
-					<input
-						placeholder="PIN"
-						type="password"
-						value={pin}
-						onChange={(e) =>
-							handleChangePin(e.target.value)
-						}
-					/>
+			{isAdmin && (
+				<div className="managePanel">
 					<button
-						disabled={pin.trim() === ''}
-						className="delete"
-						onClick={() => handleDeleteJob(job)}
+						className="edit"
+						onClick={() => handleToggleEditStatus(job)}
 					>
-						Delete
+						Edit
 					</button>
+					<div className="deleteButtonArea">
+						<input
+							placeholder="PIN"
+							type="password"
+							value={pin}
+							onChange={(e) => handleChangePin(e.target.value)}
+						/>
+						<button
+							disabled={pin.trim() === ''}
+							className="delete"
+							onClick={() => handleDeleteJob(job)}
+						>
+							Delete
+						</button>
+					</div>
 				</div>
-			</div>
+			)}
 		</div>
 	);
 };
