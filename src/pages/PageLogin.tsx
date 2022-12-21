@@ -3,7 +3,7 @@ import { AppContext } from '../appContext';
 import '../styles/pageLogin.scss';
 
 export const PageLogin = () => {
-	const { pin, handleChangePin, prePageLoad, isAdmin } =
+	const { pin, handleChangePin, prePageLoad, isAdmin, handleIdentifyAsAdminButton, handleLogoutButton } =
 		useContext(AppContext);
 
 	useEffect(() => {
@@ -30,7 +30,7 @@ export const PageLogin = () => {
 										}
 									/>
 								</div>
-								<button type="button">Identify</button>
+								<button disabled={pin.trim() === ''} type="button" onClick={() => handleIdentifyAsAdminButton()}>Identify</button>
 							</div>
 							<div className="message">
 								Once you identify as admin with your PIN, you
@@ -41,8 +41,8 @@ export const PageLogin = () => {
 						</>
 					) : (
 						<div className="messageLoggedIn">
-								<div>You are identified as admin.<br /><br />Each time you want to change data on this site, you will have to type in your PIN again in the input box next to the appropriate button.</div>
-								<button type="button">Logout</button>
+								<div>PIN is correct.<br/><br/>You are identified as admin.<br /><br />Each time you want to change data on this site, you will have to type in your PIN again in the input box next to the appropriate button.</div>
+								<button type="button" onClick={handleLogoutButton}>Logout</button>
 						</div>
 					)}
 				</fieldset>

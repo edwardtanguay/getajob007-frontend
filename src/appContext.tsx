@@ -35,7 +35,9 @@ interface IAppContext {
 	addingJob: IJob;
 	setPin: Dispatch<SetStateAction<string>>;
 	prePageLoad: () => void;
-	isAdmin: boolean
+	isAdmin: boolean;
+	handleIdentifyAsAdminButton: () => void;
+	handleLogoutButton: () => void;
 }
 
 interface IAppProvider {
@@ -265,8 +267,42 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
 	const prePageLoad = () => {
 		setPin('');
-	}
+	};
 
+	const handleIdentifyAsAdminButton = async () => {
+		try {
+			const res = await axios.post(
+				`${backendUrl}/identify-as-admin`,
+				{
+					pin,
+				},
+				{
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				}
+			);
+			if (res.status === 200) {
+				setIsAdmin(true);
+				await loadJobs();
+				await loadTodos();
+				await loadSkillTotals();
+				setPin('');
+			} else {
+				notify(`There was an error.`);
+				console.log(res);
+			}
+		} catch (e: any) {
+			const message = e.response.data.message;
+			notify(message);
+			setPin('');
+		}
+	};
+	
+	const handleLogoutButton = () => {
+		setIsAdmin(false);
+		setPin('');
+	}
 	return (
 		<AppContext.Provider
 			value={{
@@ -288,7 +324,9 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 				handleChangePin,
 				setPin,
 				prePageLoad,
-				isAdmin
+				isAdmin,
+				handleIdentifyAsAdminButton,
+handleLogoutButton
 			}}
 		>
 			{children}
