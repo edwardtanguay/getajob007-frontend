@@ -66,6 +66,7 @@ export const DisplayJob = ({ job }: IProps) => {
 					<input
 						placeholder="PIN"
 						type="password"
+						value={pin}
 						onChange={(e) =>
 							handleChangePin(e.target.value)
 						}

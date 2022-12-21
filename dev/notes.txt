@@ -4,14 +4,15 @@
 - x toggle on add button click
 
 - x fix clear button on edit form
-- .. make delete work again
-- .. make add form work
+- x make delete work again
+- x make add form work
 	- x clear button
 	- x create backend route
 	- x test with postman
 	- x save button
 	- x add  "publicationDate": "2022-12-07",
-- test add/delete
-
-- add pins
+- x test add/delete
+- .. add pin feature
+	- x first with test.rest
+	- .. frontend
 - publish to hetzner

@@ -17,9 +17,7 @@ interface IAppContext {
 	skillTotals: ISkillTotal[];
 	handleToggleSkillTotal: (skillTotal: ISkillTotal) => void;
 	handleDeleteJob: (job: IJob) => void;
-	handleChangePin: (
-		value: string
-	) => void;
+	handleChangePin: (value: string) => void;
 	handleChangeFormField: (
 		value: string,
 		job: IJob,
@@ -130,20 +128,29 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
 	const handleDeleteJob = async (job: IJob) => {
 		try {
-			const res = await axios.delete(`${backendUrl}/jobs/${job.id}`);
+			const res = await axios.delete(`${backendUrl}/jobs/${job.id}`, {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				data: {
+					pin,
+				},
+			});
+
 			if ((res.status = 200)) {
 				await loadJobs();
 				await loadTodos();
 				await loadSkillTotals();
+				setPin('');
 			} else {
 				console.log(res);
 			}
 		} catch (e: any) {
-			console.error(`ERROR: ${e.message}`);
 			const message = e.response.data.message;
 			if (message) {
 				console.error(`ERROR: ${message}`);
 			}
+			setPin('');
 		}
 	};
 
@@ -193,11 +200,15 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
 	const handleSaveAddedJob = async () => {
 		try {
-			const res = await axios.post(`${backendUrl}/job`, addingJob.editItem, {
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
+			const res = await axios.post(
+				`${backendUrl}/job`,
+				addingJob.editItem,
+				{
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				}
+			);
 			if ((res.status = 200)) {
 				await loadJobs();
 				await loadTodos();
@@ -233,7 +244,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
 	const handleChangePin = (pin: string) => {
 		setPin(pin);
-	}
+	};
 
 	return (
 		<AppContext.Provider
@@ -253,7 +264,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 				toggleAddingForm,
 				pin,
 				addingJob,
-				handleChangePin
+				handleChangePin,
 			}}
 		>
 			{children}

@@ -8,6 +8,11 @@
 
 ### delete a job
 DELETE {{url}}/jobs/3 
+content-type: application/json
+
+{
+	"pin": "1232"
+}
 
 ### save an edited job
 PATCH {{url}}/job
