@@ -1,12 +1,18 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { AppContext } from '../appContext';
 import '../styles/pageSkills.scss';
 
 export const PageSkills = () => {
 	const {
 		skillTotals,
-		handleToggleSkillTotal
+		handleToggleSkillTotal,
+		prePageLoad,
 	} = useContext(AppContext);
+
+	useEffect(() => {
+		prePageLoad();
+	},[]);
+
 	return (
 		<div className="page pageSkills">
 			<h2>Skills</h2>

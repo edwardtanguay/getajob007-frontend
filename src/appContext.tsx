@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SetStateAction, Dispatch } from 'react';
 import { createContext } from 'react';
 import axios from 'axios';
 import {
@@ -33,6 +33,8 @@ interface IAppContext {
 	toggleAddingForm: () => void;
 	pin: string;
 	addingJob: IJob;
+	setPin: Dispatch<SetStateAction<string>>;
+	prePageLoad: () => void;
 }
 
 interface IAppProvider {
@@ -259,6 +261,10 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 		setPin(pin);
 	};
 
+	const prePageLoad = () => {
+		setPin('');
+	}
+
 	return (
 		<AppContext.Provider
 			value={{
@@ -278,6 +284,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 				pin,
 				addingJob,
 				handleChangePin,
+				setPin,
+				prePageLoad
 			}}
 		>
 			{children}

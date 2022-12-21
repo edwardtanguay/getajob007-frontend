@@ -20,6 +20,8 @@
 - .. make admin login
 	- x page
 	- .. route: identify-as-admin
+
+- always clear pin
 - update howto
 - publish to hetzner
 - update howto with hetzner

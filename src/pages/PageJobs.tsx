@@ -1,5 +1,5 @@
 import React from 'react';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { AppContext } from '../appContext';
 import { DisplayJob } from '../components/DisplayJob';
 import { JobForm } from '../components/JobForm';
@@ -7,7 +7,12 @@ import { IJob, FormAction } from '../interfaces';
 import '../styles/pageJobs.scss';
 
 export const PageJobs = () => {
-	const { jobs, anyJobIsBeingEdited, isAdding, toggleAddingForm, addingJob } = useContext(AppContext);
+	const { jobs, anyJobIsBeingEdited, isAdding, toggleAddingForm, addingJob, prePageLoad } = useContext(AppContext);
+
+	useEffect(() => {
+		prePageLoad();
+	},[]);
+
 
 	return (
 		<div className="page pageJobs">
