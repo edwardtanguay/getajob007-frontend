@@ -3,10 +3,13 @@ import { NavLink, Routes, Route, Navigate } from 'react-router-dom';
 import { PageDashboard } from './pages/PageDashboard';
 import { PageJobs } from './pages/PageJobs';
 import { PageSkills } from './pages/PageSkills';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 	return (
 		<div className="App">
+			<ToastContainer />
 			<h1>Get a Job</h1>
 			<nav>
 				<NavLink to="/dashboard">Dashboard</NavLink>

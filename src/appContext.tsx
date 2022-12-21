@@ -10,6 +10,7 @@ import {
 	blankJob,
 } from './interfaces';
 import { cloneDeep } from 'lodash-es';
+import { toast } from 'react-toastify';
 
 interface IAppContext {
 	jobs: IJob[];
@@ -37,6 +38,8 @@ interface IAppContext {
 interface IAppProvider {
 	children: React.ReactNode;
 }
+
+const notify = () => toast("Wow so easy!");
 
 const backendUrl = 'http://localhost:3011';
 export const AppContext = createContext<IAppContext>({} as IAppContext);
@@ -147,6 +150,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 			}
 		} catch (e: any) {
 			const message = e.response.data.message;
+			notify();
 			if (message) {
 				console.error(`ERROR: ${message}`);
 			}
