@@ -15,7 +15,8 @@
 - x add pin feature
 	- x first with test.rest
 	- x frontend
-- .. pin on add
+- x pin on add
+- .. pin on edit
 - update howto
 - publish to hetzner
 - update howto with hetzner

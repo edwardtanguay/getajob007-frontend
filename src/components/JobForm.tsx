@@ -71,12 +71,22 @@ export const JobForm = ({ job, formAction }: IProps) => {
 							>
 								Clear
 							</button>
-							<button
-								type="button"
-								onClick={() => handleSaveEditedJob(job)}
-							>
-								Save
-							</button>
+							<div className="saveButtonArea">
+								<input
+									placeholder="PIN"
+									type="password"
+									value={pin}
+									onChange={(e) =>
+										handleChangePin(e.target.value)
+									}
+								/>
+								<button
+									type="button"
+									onClick={() => handleSaveEditedJob(job)}
+								>
+									Save
+								</button>
+							</div>
 						</>
 					) : (
 						<>

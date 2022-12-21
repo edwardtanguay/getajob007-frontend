@@ -19,13 +19,16 @@ PATCH {{url}}/job
 content-type: application/json
 
 {
-	"id": 1,
-	"title": "ttt",
-	"company": "ccc",
-	"url": "uuu",
-	"description": "ddd",
-	"skillList": "sss",
-	"todo": "ttt"
+	"job": {
+		"id": 1,
+		"title": "ttt555",
+		"company": "ccc",
+		"url": "uuu",
+		"description": "ddd",
+		"skillList": "sss",
+		"todo": "ttt"
+	}, 
+	"pin": "1233"
 }
 
 ### test route (replace with vitest later)
