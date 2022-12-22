@@ -46,7 +46,7 @@ interface IAppProvider {
 
 const notify = (message: string) => toast(message);
 
-const backendUrl = `http://localhost:${import.meta.env.VITE_BACKEND_URL}`;
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 export const AppContext = createContext<IAppContext>({} as IAppContext);
 
 export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
