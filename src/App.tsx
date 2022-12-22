@@ -22,7 +22,7 @@ function App() {
 				pauseOnHover
 				theme="dark"
 			/>
-			<h1>Get a Job222</h1>
+			<h1>Get a Job</h1>
 			<nav>
 				<NavLink to="/dashboard">Dashboard</NavLink>
 				<NavLink to="/jobs">Jobs</NavLink>
