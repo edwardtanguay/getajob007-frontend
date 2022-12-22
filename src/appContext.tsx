@@ -46,7 +46,7 @@ interface IAppProvider {
 
 const notify = (message: string) => toast(message);
 
-const backendUrl = 'http://localhost:3011';
+const backendUrl = `http://localhost:${import.meta.env.VITE_BACKEND_URL}`;
 export const AppContext = createContext<IAppContext>({} as IAppContext);
 
 export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
@@ -298,11 +298,11 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 			setPin('');
 		}
 	};
-	
+
 	const handleLogoutButton = () => {
 		setIsAdmin(false);
 		setPin('');
-	}
+	};
 	return (
 		<AppContext.Provider
 			value={{
@@ -326,7 +326,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 				prePageLoad,
 				isAdmin,
 				handleIdentifyAsAdminButton,
-handleLogoutButton
+				handleLogoutButton,
 			}}
 		>
 			{children}
